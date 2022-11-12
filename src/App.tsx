@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import  { useState } from 'react';
+import {BrowserRouter , Route, Routes, Navigate} from 'react-router-dom';
+import Avia from './components/avia/Avia';
+import AviaInfo from './components/aviaInfo/AviaInfo';
 import './App.css';
 
 function App() {
+  const [findInfo, setFindInfo] = useState({
+    from: '',
+    dateStart: '',
+    to: '',
+    dateFinish: ''
+  })
+
+
+  
   return (
+    <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path='/avia' element={<Avia setFindInfo={setFindInfo} />}/>
+        <Route path='/avia/info' element={<AviaInfo findInfo={findInfo}  />}/>
+        <Route path='/'  element={<Navigate to="/avia" replace />}/>
+      </Routes>
     </div>
+
+    </BrowserRouter>
   );
 }
 
